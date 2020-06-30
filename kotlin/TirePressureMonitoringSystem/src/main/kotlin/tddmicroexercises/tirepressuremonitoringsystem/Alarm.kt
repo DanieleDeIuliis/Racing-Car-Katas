@@ -4,7 +4,7 @@ open class Alarm(private val _sensor: Sensor = Sensor()) {
     private val LowPressureThreshold = 17.0
     private val HighPressureThreshold = 21.0
 
-    internal var sensor = Sensor()
+    internal var sensor = _sensor
 
     var isAlarmOn = false
         internal set
