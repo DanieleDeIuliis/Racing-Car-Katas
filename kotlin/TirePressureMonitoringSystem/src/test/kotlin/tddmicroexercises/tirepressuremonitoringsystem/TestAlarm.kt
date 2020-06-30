@@ -21,14 +21,14 @@ class TestAlarm {
 
     @Test
     fun `raise the alarm when the pressure measured by the sensor is over the higher threshold`() {
-        val alarm = AlarmWithStubbedSensor(pressure = 300.0)
+        val alarm = Alarm(ProgrammableSensor(measuredPressure = 300.0))
         alarm.check()
         assertTrue(alarm.isAlarmOn)
     }
 
     @Test
     fun `does not raise the alarm when the pressure measured by the sensor is within the acceptable range`() {
-        val alarm = AlarmWithStubbedSensor(pressure = 20.0)
+        val alarm = Alarm(ProgrammableSensor(measuredPressure = 20.0))
         alarm.check()
         assertFalse(alarm.isAlarmOn)
     }
@@ -36,10 +36,4 @@ class TestAlarm {
 
 class ProgrammableSensor(private val measuredPressure: Double): Sensor() {
     override fun popNextPressurePsiValue() = measuredPressure
-}
-
-class AlarmWithStubbedSensor(val pressure: Double) : Alarm() {
-    override fun popNextPressurePsiValue(): Double {
-        return pressure
-    }
 }
