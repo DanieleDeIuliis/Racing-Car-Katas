@@ -2,7 +2,6 @@ package tddmicroexercises.tirepressuremonitoringsystem
 
 import org.junit.Test
 import org.junit.Assert.*
-import org.junit.Ignore
 
 class TestAlarm {
 
@@ -34,6 +33,6 @@ class TestAlarm {
     }
 }
 
-class ProgrammableSensor(private val measuredPressure: Double): Sensor() {
+class ProgrammableSensor(private val measuredPressure: Double): Sensor {
     override fun popNextPressurePsiValue() = measuredPressure
 }
