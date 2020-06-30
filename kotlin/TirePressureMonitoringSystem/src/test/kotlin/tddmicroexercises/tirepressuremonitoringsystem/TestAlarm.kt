@@ -2,6 +2,7 @@ package tddmicroexercises.tirepressuremonitoringsystem
 
 import org.junit.Test
 import org.junit.Assert.*
+import org.junit.Ignore
 
 class TestAlarm {
 
@@ -31,6 +32,17 @@ class TestAlarm {
         alarm.check()
         assertFalse(alarm.isAlarmOn)
     }
+
+    @Test @Ignore
+    fun `raise the alarm when the pressure measured by the sensor is under the lower threshold 2`() {
+        val alarm = Alarm(ProgrammableSensor(0.0))
+        alarm.check()
+        assertTrue(alarm.isAlarmOn)
+    }
+}
+
+class ProgrammableSensor(private val measuredPressure: Double): Sensor() {
+    override fun popNextPressurePsiValue() = measuredPressure
 }
 
 class AlarmWithStubbedSensor(val pressure: Double) : Alarm() {
