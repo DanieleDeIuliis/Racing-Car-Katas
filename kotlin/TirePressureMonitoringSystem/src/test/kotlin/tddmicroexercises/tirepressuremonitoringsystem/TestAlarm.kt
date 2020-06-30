@@ -18,10 +18,23 @@ class TestAlarm {
         alarm.check()
         assertTrue(alarm.isAlarmOn)
     }
+
+    @Test
+    fun `raise the alarm when the pressure measured by the sensor is over the higher threshold`() {
+        val alarm = AlarmWithPressureOverTheHigherThreshold()
+        alarm.check()
+        assertTrue(alarm.isAlarmOn)
+    }
 }
 
 class AlarmWithPressureUnderTheLowerThreshold: Alarm() {
     override fun popNextPressurePsiValue(): Double {
         return 0.0
+    }
+}
+
+class AlarmWithPressureOverTheHigherThreshold: Alarm() {
+    override fun popNextPressurePsiValue(): Double {
+        return 300.0
     }
 }
