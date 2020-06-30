@@ -24,6 +24,13 @@ class TestAlarm {
         alarm.check()
         assertTrue(alarm.isAlarmOn)
     }
+
+    @Test
+    fun `does not raise the alarm when the pressure measured by the sensor is within the acceptable range`() {
+        val alarm = AlarmWithStubbedSensor(pressure = 20.0)
+        alarm.check()
+        assertFalse(alarm.isAlarmOn)
+    }
 }
 
 class AlarmWithStubbedSensor(val pressure: Double) : Alarm() {
