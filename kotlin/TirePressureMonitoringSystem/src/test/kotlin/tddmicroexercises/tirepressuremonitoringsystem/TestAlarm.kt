@@ -12,10 +12,16 @@ class TestAlarm {
         assertEquals(false, alarm.isAlarmOn)
     }
 
-    @Test @Ignore
+    @Test
     fun `raise the alarm when the pressure measured by the sensor is under the lower threshold`() {
-        val alarm = Alarm()
+        val alarm = AlarmWithPressureUnderTheLowerThreshold()
         alarm.check()
         assertTrue(alarm.isAlarmOn)
+    }
+}
+
+class AlarmWithPressureUnderTheLowerThreshold: Alarm() {
+    override fun popNextPressurePsiValue(): Double {
+        return 0.0
     }
 }
