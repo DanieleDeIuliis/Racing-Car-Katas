@@ -12,8 +12,8 @@ class TestAlarm {
     }
 
     @Test
-    fun `Alarm is on when pressure is under lower limit with TestAlarm`() {
-        val alarm = TestableAlarm(16.9999)
+    fun `Alarm is on when pressure is under lower limit with MockSensor`() {
+        val alarm = Alarm(MockSensor(16.9999))
 
         alarm.check()
 
@@ -22,8 +22,8 @@ class TestAlarm {
 
 
     @Test
-    fun `Alarm is on when pressure is over upper limit with TestAlarm`() {
-        val alarm = TestableAlarm(21.1)
+    fun `Alarm is on when pressure is over upper limit with MockSensor`() {
+        val alarm = Alarm(MockSensor(21.1))
 
         alarm.check()
 
@@ -31,8 +31,8 @@ class TestAlarm {
     }
 
     @Test
-    fun `Alarm is off when pressure is between limits with TestAlarm`() {
-        val alarm = TestableAlarm(20.0)
+    fun `Alarm is off when pressure is between limits with MockSensor`() {
+        val alarm = Alarm(MockSensor(20.0))
 
         alarm.check()
 
