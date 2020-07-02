@@ -29,5 +29,14 @@ class TestAlarm {
         assertEquals(true, alarm.isAlarmOn)
     }
 
+    @Test
+    fun `Alarm is off when pressure is between limits`() {
+        val alarm = Alarm()
+
+        alarm.check(20.0)
+
+        assertEquals(false, alarm.isAlarmOn)
+    }
+
 
 }
