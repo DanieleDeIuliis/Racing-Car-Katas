@@ -28,4 +28,13 @@ class TestAlarm {
         alarm.check()
         assertEquals(true, alarm.isAlarmOn)
     }
+
+    @Test
+    fun `alarm is off if the pressure is within specification`() {
+        val alarm = Alarm(sensor = object : Sensor {
+            override fun popNextPressurePsiValue(): Double = 20.0
+        })
+        alarm.check()
+        assertEquals(false, alarm.isAlarmOn)
+    }
 }
