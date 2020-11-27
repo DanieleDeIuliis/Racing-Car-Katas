@@ -1,24 +1,12 @@
 package tddmicroexercises.textconvertor
 
-import java.io.BufferedReader
-import java.io.FileReader
 import java.io.IOException
 
-class HtmlTextConverter(val filename: String) {
+class HtmlTextConverter(val filename: String, private val textRetriever: TextRetriever = FileTextRetriever(filename)) {
 
     @Throws(IOException::class)
     fun convertToHtml(): String {
-
-        val reader = BufferedReader(FileReader(filename))
-
-        var line: String? = reader.readLine()
-        var html = ""
-        while (line != null) {
-            html += StringEscapeUtils.escapeHtml(line)
-            html += "<br />"
-            line = reader.readLine()
-        }
-        return html
-
+        return textRetriever.getLines()
+            .fold("", { acc, string -> acc + "${StringEscapeUtils.escapeHtml(string)}<br />"})
     }
 }
