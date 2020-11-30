@@ -6,8 +6,23 @@ import org.junit.Assert.*
 class TestAlarm {
 
     @Test
-    fun foo() {
+    fun `return false when temperature is in range`() {
         val alarm = Alarm()
-        assertEquals(false, alarm.isAlarmOn)
+        alarm.check(20.0)
+        assertFalse(alarm.isAlarmOn)
+    }
+
+    @Test
+    fun `return true when temperature is greater than maximum`() {
+        val alarm = Alarm()
+        alarm.check(21.1)
+        assertTrue( alarm.isAlarmOn)
+    }
+
+    @Test
+    fun `return false when temperature is lower than minimum`() {
+        val alarm = Alarm()
+        alarm.check(16.9)
+        assertTrue(alarm.isAlarmOn)
     }
 }
