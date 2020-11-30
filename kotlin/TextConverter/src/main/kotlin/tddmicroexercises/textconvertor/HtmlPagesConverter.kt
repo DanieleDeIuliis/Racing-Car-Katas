@@ -11,20 +11,17 @@ constructor(val filename: String, private val textRetriever: MultiPageTextRetrie
 
     @Throws(IOException::class)
     fun getHtmlPage(page: Int): String {
-        val reader = BufferedReader(FileReader(this.filename))
-        reader.skip(textRetriever.breaks[page].toLong())
+        val lines = textRetriever.getLines()
+        val lineToStart = textRetriever.breaks[page]
         val htmlPage = StringBuffer()
-        var line: String? = reader.readLine()
-        while (line != null) {
-            if (line.contains("PAGE_BREAK")) {
+        for(index in lineToStart until lines.size){
+            if (lines.get(index).contains("PAGE_BREAK")) {
                 break
             }
-            htmlPage.append(StringEscapeUtils.escapeHtml(line))
+            htmlPage.append(StringEscapeUtils.escapeHtml(lines.get(index)))
             htmlPage.append("<br />")
 
-            line = reader.readLine()
         }
-        reader.close()
         return htmlPage.toString()
     }
 
