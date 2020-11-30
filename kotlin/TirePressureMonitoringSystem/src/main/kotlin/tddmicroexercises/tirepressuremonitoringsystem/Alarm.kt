@@ -11,6 +11,6 @@ class Alarm(private val sensor: Sensor = Sensor()) {
     fun check(): Boolean{
         val psiPressureValue = sensor.popNextPressurePsiValue()
         return psiPressureValue < LowPressureThreshold || psiPressureValue > HighPressureThreshold
-        
+
     }
 }
