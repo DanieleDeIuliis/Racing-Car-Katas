@@ -6,8 +6,8 @@ import org.junit.Test
 class HtmlTextConverterTest {
     @Test
     fun `return the lines with html new line value at the end of each line `() {
-        val pathName = this::class.java.getResource("/test").path
-        val converter = HtmlTextConverter(pathName)
+        val converter = HtmlTextConverter("dummy", TextRetrieverMock("Ciao sono un file di test.\n" +
+                "Vediamo se funziona il multilinea."))
         assertEquals("Ciao sono un file di test.<br />Vediamo se funziona il multilinea.<br />", converter.convertToHtml())
     }
 
