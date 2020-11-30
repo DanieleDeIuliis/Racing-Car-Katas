@@ -1,10 +1,8 @@
 package tddmicroexercises.tirepressuremonitoringsystem
 
-class Alarm {
+class Alarm(private val sensor: Sensor = Sensor()) {
     private val LowPressureThreshold = 17.0
     private val HighPressureThreshold = 21.0
-
-    internal var sensor = Sensor()
 
     var isAlarmOn = false
         internal set
