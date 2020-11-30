@@ -7,22 +7,22 @@ class TestAlarm {
 
     @Test
     fun `return false when temperature is in range`() {
-        val alarm = Alarm()
-        alarm.check(20.0)
+        val alarm = Alarm(TestSensor(20.0))
+        alarm.check()
         assertFalse(alarm.isAlarmOn)
     }
 
     @Test
     fun `return true when temperature is greater than maximum`() {
-        val alarm = Alarm()
-        alarm.check(21.1)
+        val alarm = Alarm(TestSensor(21.1))
+        alarm.check()
         assertTrue( alarm.isAlarmOn)
     }
 
     @Test
     fun `return false when temperature is lower than minimum`() {
-        val alarm = Alarm()
-        alarm.check(16.9)
+        val alarm = Alarm(TestSensor(16.9))
+        alarm.check()
         assertTrue(alarm.isAlarmOn)
     }
 }
