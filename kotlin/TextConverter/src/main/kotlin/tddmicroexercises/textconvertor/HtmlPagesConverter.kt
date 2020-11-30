@@ -14,7 +14,10 @@ constructor(val filename: String, private val textRetriever: MultiPageTextRetrie
     fun getHtmlPage(page: Int): String {
         val lines = textRetriever.getLines()
         val stringBuilder = StringBuilder()
-        for(index in textRetriever.breaks[page] until textRetriever.breaks[page + 1]){
+        for(index in textRetriever.listBreaks[page] until lines.size){
+            if (lines[index].contains("PAGE_BREAK")) {
+                break
+            }
             stringBuilder.append(StringEscapeUtils.escapeHtml(lines[index]))
                 .append("<br />")
         }
