@@ -7,9 +7,7 @@ import kotlin.streams.toList
 
 class HtmlTextConverter(private val filename: String, private val textRetriever: TextRetriever = TextRetriever(filename)) {
 
-    @Throws(IOException::class)
     fun convertToHtml(): String {
-
         val linesToConvert = textRetriever.getLines()
         var html = ""
         linesToConvert.forEach { html += "${StringEscapeUtils.escapeHtml(it)}<br />"}
