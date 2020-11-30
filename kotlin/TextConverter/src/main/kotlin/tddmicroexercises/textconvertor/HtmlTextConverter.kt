@@ -5,20 +5,15 @@ import java.io.FileReader
 import java.io.IOException
 import kotlin.streams.toList
 
-class HtmlTextConverter(private val filename: String) {
+class HtmlTextConverter(private val filename: String, private val textRetriever: TextRetriever = TextRetriever(filename)) {
 
     @Throws(IOException::class)
     fun convertToHtml(): String {
 
-        val linesToConvert = getLines()
+        val linesToConvert = textRetriever.getLines()
         var html = ""
         linesToConvert.forEach { html += "${StringEscapeUtils.escapeHtml(it)}<br />"}
         return html
-
-    }
-
-    fun getLines(): List<String> {
-        return BufferedReader(FileReader(filename)).lines().toList()
 
     }
 }
