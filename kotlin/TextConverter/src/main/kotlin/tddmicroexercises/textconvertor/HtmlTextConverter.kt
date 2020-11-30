@@ -3,22 +3,22 @@ package tddmicroexercises.textconvertor
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
+import kotlin.streams.toList
 
-class HtmlTextConverter(val filename: String) {
+class HtmlTextConverter(private val filename: String) {
 
     @Throws(IOException::class)
     fun convertToHtml(): String {
 
-        val reader = BufferedReader(FileReader(filename))
-
-        var line: String? = reader.readLine()
+        val linesToConvert = getLines()
         var html = ""
-        while (line != null) {
-            html += StringEscapeUtils.escapeHtml(line)
-            html += "<br />"
-            line = reader.readLine()
-        }
+        linesToConvert.forEach { html += "${StringEscapeUtils.escapeHtml(it)}<br />"}
         return html
+
+    }
+
+    fun getLines(): List<String> {
+        return BufferedReader(FileReader(filename)).lines().toList()
 
     }
 }
