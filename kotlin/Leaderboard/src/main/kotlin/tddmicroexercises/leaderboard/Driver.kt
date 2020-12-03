@@ -1,7 +1,6 @@
 package tddmicroexercises.leaderboard
 
-open class Driver(val name: String, val country: String) {
-
+abstract class Driver(open val name: String, val country: String) {
     override fun hashCode(): Int {
         return name.hashCode() * 31 + country.hashCode()
     }
@@ -10,10 +9,10 @@ open class Driver(val name: String, val country: String) {
         if (this === any) {
             return true
         }
-        if (any == null || any !is Driver) {
+        if (any == null || any !is HumanDriver) {
             return false
         }
-        val other = any as Driver?
+        val other = any as HumanDriver?
         return this.name == other!!.name && this.country == other.country
     }
 }

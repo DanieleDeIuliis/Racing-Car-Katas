@@ -5,9 +5,10 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 
-import tddmicroexercises.leaderboard.TestData.driver1
-import tddmicroexercises.leaderboard.TestData.driver2
-import tddmicroexercises.leaderboard.TestData.driver3
+import tddmicroexercises.leaderboard.TestData.humanDriver1
+import tddmicroexercises.leaderboard.TestData.humanDriver2
+import tddmicroexercises.leaderboard.TestData.humanDriver3
+import tddmicroexercises.leaderboard.TestData.driver4
 
 class LeaderboardTest {
 
@@ -38,16 +39,23 @@ class LeaderboardTest {
     fun itShouldKeepAllDriversWhenSamePoints() {
         // setup
         // bug, drops drivers with same points
-        val winDriver1 = Race("Australian Grand Prix", driver1, driver2, driver3)
-        val winDriver2 = Race("Malaysian Grand Prix", driver2, driver1, driver3)
+        val winDriver1 = Race("Australian Grand Prix", humanDriver1, humanDriver2, humanDriver3)
+        val winDriver2 = Race("Malaysian Grand Prix", humanDriver2, humanDriver1, humanDriver3)
         val exEquoLeaderBoard = Leaderboard(winDriver1, winDriver2)
 
         // act
         val rankings = exEquoLeaderBoard.driverRankings()
 
         // verify
-        assertEquals(arrayListOf(driver1.name, driver2.name, driver3.name), rankings)
+        assertEquals(arrayListOf(humanDriver1.name, humanDriver2.name, humanDriver3.name), rankings)
         // note: the order of driver1 and driver2 is JDK/platform dependent
     }
 
+    @Test
+    fun `when only one race the self driving car wins`() {
+        val winDriver1 = Race("Australian Grand Prix", driver4, humanDriver2, humanDriver3)
+        val leaderbord = Leaderboard(winDriver1)
+        val rankings = leaderbord.driverRankings()
+        assertEquals(driver4.name, rankings.first())
+    }
 }

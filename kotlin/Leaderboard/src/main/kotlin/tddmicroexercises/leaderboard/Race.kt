@@ -2,17 +2,13 @@ package tddmicroexercises.leaderboard
 
 class Race(private val name: String, vararg drivers: Driver) {
     val results: List<Driver>
-    private val driverNames: MutableMap<Driver, String>
+    private val humanDriverNames: MutableMap<Driver, String>
 
     init {
         this.results = arrayListOf(*drivers)
-        this.driverNames = HashMap()
+        this.humanDriverNames = HashMap()
         for (driver in results) {
-            var driverName = driver.name
-            if (driver is SelfDrivingCar) {
-                driverName = "Self Driving Car - " + driver.country + " (" + driver.algorithmVersion + ")"
-            }
-            this.driverNames[driver] = driverName
+            this.humanDriverNames[driver] = driver.name
         }
     }
 
@@ -25,7 +21,7 @@ class Race(private val name: String, vararg drivers: Driver) {
     }
 
     fun getDriverName(driver: Driver): String? {
-        return this.driverNames[driver]
+        return this.humanDriverNames[driver]
     }
 
     override fun toString(): String {

@@ -2,9 +2,9 @@ package tddmicroexercises.leaderboard
 
 object TestData {
 
-    var driver1: Driver
-    var driver2: Driver
-    var driver3: Driver
+    var humanDriver1: HumanDriver
+    var humanDriver2: HumanDriver
+    var humanDriver3: HumanDriver
     var driver4: SelfDrivingCar
 
     var race1: Race
@@ -18,18 +18,18 @@ object TestData {
     var sampleLeaderboard2: Leaderboard
 
     init {
-        driver1 = Driver("Nico Rosberg", "DE")
-        driver2 = Driver("Lewis Hamilton", "UK")
-        driver3 = Driver("Sebastian Vettel", "DE")
+        humanDriver1 = HumanDriver("Nico Rosberg", "DE")
+        humanDriver2 = HumanDriver("Lewis Hamilton", "UK")
+        humanDriver3 = HumanDriver("Sebastian Vettel", "DE")
         driver4 = SelfDrivingCar("1.2", "Acme")
 
-        race1 = Race("Australian Grand Prix", driver1, driver2, driver3)
-        race2 = Race("Malaysian Grand Prix", driver3, driver2, driver1)
-        race3 = Race("Chinese Grand Prix", driver2, driver1, driver3)
-        race4 = Race("Fictional Grand Prix 1", driver1, driver2, driver4)
-        race5 = Race("Fictional Grand Prix 2", driver4, driver2, driver1)
+        race1 = Race("Australian Grand Prix", humanDriver1, humanDriver2, humanDriver3)
+        race2 = Race("Malaysian Grand Prix", humanDriver3, humanDriver2, humanDriver1)
+        race3 = Race("Chinese Grand Prix", humanDriver2, humanDriver1, humanDriver3)
+        race4 = Race("Fictional Grand Prix 1", humanDriver1, humanDriver2, driver4)
+        race5 = Race("Fictional Grand Prix 2", driver4, humanDriver2, humanDriver1)
         driver4.algorithmVersion = "1.3"
-        race6 = Race("Fictional Grand Prix 3", driver2, driver1, driver4)
+        race6 = Race("Fictional Grand Prix 3", humanDriver2, humanDriver1, driver4)
 
         sampleLeaderboard1 = Leaderboard(race1, race2, race3)
         sampleLeaderboard2 = Leaderboard(race4, race5, race6)
