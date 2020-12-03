@@ -1,10 +1,10 @@
 package tddmicroexercises.turnticketdispenser
 
-class TicketDispenser {
+class TicketDispenser(private val turnSequence: TurnSequence) {
+    constructor() : this(StaticTurnSequence())
+
     val turnTicket: TurnTicket
         get() {
-            val newTurnNumber = TurnNumberSequence.nextTurnNumber
-
-            return TurnTicket(newTurnNumber)
+            return TurnTicket(turnSequence.next())
         }
 }
