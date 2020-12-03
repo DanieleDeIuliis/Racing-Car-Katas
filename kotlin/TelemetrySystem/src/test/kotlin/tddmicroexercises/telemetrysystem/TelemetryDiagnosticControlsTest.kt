@@ -1,11 +1,23 @@
 package tddmicroexercises.telemetrysystem
 
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class TelemetryDiagnosticControlsTest {
 
     @Test
-    fun CheckTransmission_should_send_a_diagnostic_message_and_receive_a_status_message_response() {
+    fun `checkTransmission should send a diagnostic message and receive a status message response`() {
+        val diagnosticMessage = "I'm a beautiful diagnostic message"
+        val telemetryClientStub = TelemetryStub(diagnosticMessage, true)
+        val telemetryDiagnosticControls = TelemetryDiagnosticControls(telemetryClientStub)
+        telemetryDiagnosticControls.checkTransmission()
+        assertEquals("I'm a beautiful diagnostic message",telemetryDiagnosticControls.diagnosticInfo)
     }
 
+    @Test(expected = Exception::class)
+    fun `connection failed`() {
+        val telemetryClientStub = TelemetryStub("diagnosticMessage", false)
+        val telemetryDiagnosticControls = TelemetryDiagnosticControls(telemetryClientStub)
+        telemetryDiagnosticControls.checkTransmission()
+    }
 }
