@@ -1,35 +1,30 @@
 package tddmicroexercises.leaderboard
 
 class Race(private val name: String, vararg drivers: Driver) {
-    val results: List<Driver>
-    private val humanDriverNames: MutableMap<Driver, String>
+    private val POINTS = arrayOf(25, 18, 15)
+    private val results: List<Driver>
 
     init {
         this.results = arrayListOf(*drivers)
-        this.humanDriverNames = HashMap()
-        for (driver in results) {
-            this.humanDriverNames[driver] = driver.name
-        }
     }
 
-    fun position(driver: Driver): Int {
+    private fun position(driver: Driver): Int {
         return this.results.indexOf(driver)
     }
 
-    fun getPoints(driver: Driver): Int {
-        return Race.POINTS[position(driver)]
-    }
 
-    fun getDriverName(driver: Driver): String? {
-        return this.humanDriverNames[driver]
+    fun getPoints(driver: Driver): Int {
+        val position = position(driver)
+        return if(position <= 3) POINTS[position] else 0
     }
 
     override fun toString(): String {
         return name
     }
 
-    companion object {
-
-        private val POINTS = arrayOf(25, 18, 15)
+    fun getNameToPointsResults(): Map<String, Int> {
+        val resultsWithPoints = mutableMapOf<String, Int>()
+        results.forEach { resultsWithPoints[it.name] = getPoints(it)}
+        return resultsWithPoints
     }
 }

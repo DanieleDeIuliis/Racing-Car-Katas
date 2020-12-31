@@ -1,3 +1,3 @@
 package tddmicroexercises.leaderboard
 
-class HumanDriver(name: String, country: String) : Driver(name, country)
+data class HumanDriver(override val name: String, val country: String) : Driver

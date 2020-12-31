@@ -1,7 +1,9 @@
 package tddmicroexercises.leaderboard
 
+import junit.framework.Assert.assertEquals
 import org.junit.Assert
 import org.junit.Test
+import tddmicroexercises.leaderboard.TestData.race1
 
 class RaceTest {
 
@@ -17,4 +19,12 @@ class RaceTest {
         Assert.assertEquals(15, TestData.race1.getPoints(TestData.humanDriver3))
     }
 
+    @Test
+    fun name() {
+        val resultsWithPoints: Map<String, Int> = race1.getNameToPointsResults()
+
+        assertEquals(25, resultsWithPoints["Nico Rosberg"])
+        assertEquals(18, resultsWithPoints["Lewis Hamilton"])
+        assertEquals(15, resultsWithPoints["Sebastian Vettel"])
+    }
 }

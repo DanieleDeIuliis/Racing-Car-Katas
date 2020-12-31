@@ -13,11 +13,7 @@ class Leaderboard(vararg races: Race) {
     fun driverResults(): Map<String, Int> {
         val results = HashMap<String, Int>()
         this.races.forEach { race ->
-            race.results.forEach { driver ->
-                val driverName = race.getDriverName(driver)
-                val points = race.getPoints(driver)
-                results[driverName!!] = results.getOrDefault(driverName,0).plus(points)
-            }
+            race.getNameToPointsResults().forEach { (name, points) -> results[name] = results.getOrDefault(name, 0).plus(points)}
         }
         return results
     }
